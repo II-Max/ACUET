@@ -11,7 +11,7 @@
             --bg-deep: #050508; --nebula-pink: rgba(255, 105, 180, 0.25);
             --nebula-purple: rgba(138, 43, 226, 0.25); --nebula-blue: rgba(65, 105, 225, 0.25);
             --text-light: #f8f9fa; --accent-pink: #ff69b4; --tech-blue: #00f0ff; 
-            --tech-dark: rgba(15, 25, 45, 0.85); /* Đổi màu nền thẻ để mượt hơn */
+            --tech-dark: rgba(15, 25, 45, 0.85);
         }
 
         body, html {
@@ -29,7 +29,6 @@
         .nebula { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.8; animation: floatNebula 20s infinite alternate ease-in-out; mix-blend-mode: screen; }
         .nebula-1 { width: 50vw; height: 50vw; background: var(--nebula-pink); top: -10%; left: -10%; }
         .nebula-2 { width: 60vw; height: 60vw; background: var(--nebula-purple); bottom: -20%; right: -10%; animation-delay: -5s; }
-        /* Bỏ box-shadow ở sao tĩnh để tối ưu hiệu năng mobile */
         .star { position: absolute; background: white; border-radius: 50%; animation: twinkle infinite alternate; }
         
         .shooting-star {
@@ -75,19 +74,20 @@
         }
         .grid-container { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; width: 100%; }
         
-        /* Đã bỏ backdrop-filter ở signal-card để chống lag trên điện thoại */
+        /* FIX LỖI NHẤP NHÁY TRÊN IPHONE: Thêm translateZ(0) để ép iPhone dùng GPU */
         .signal-card {
             background: var(--tech-dark); border: 1px solid rgba(0, 240, 255, 0.3);
             border-radius: 12px; padding: 25px 10px; text-align: center; cursor: pointer;
             transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; justify-content: center;
             position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+            -webkit-transform: translateZ(0); transform: translateZ(0); -webkit-backface-visibility: hidden; backface-visibility: hidden;
         }
         .signal-card::before {
             content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
             transition: 0.5s;
         }
-        .signal-card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 240, 255, 0.3); border-color: #fff; }
+        .signal-card:hover { transform: translateY(-8px) translateZ(0); box-shadow: 0 10px 25px rgba(0, 240, 255, 0.3); border-color: #fff; }
         .signal-card:hover::before { left: 100%; }
         
         .signal-icon { font-size: 32px; color: var(--tech-blue); margin-bottom: 15px; filter: drop-shadow(0 0 8px var(--tech-blue)); }
@@ -120,8 +120,9 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 105, 180, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.1);
             text-align: center; opacity: 0; transform: scale(0.8) translateY(20px);
             transition: all 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            -webkit-transform: translateZ(0); transform: translateZ(0); /* Fix iOS lag */
         }
-        .show-message { opacity: 1 !important; transform: scale(1) translateY(0) !important; }
+        .show-message { opacity: 1 !important; transform: scale(1) translateY(0) translateZ(0) !important; }
         
         .msg-title {
             font-family: 'Dancing Script', cursive; font-size: 46px;
@@ -190,7 +191,7 @@
         @keyframes orbit { 0% { transform: translateX(-50%) rotate(0deg) translateY(-20px); } 50% { transform: translateX(-50%) rotate(180deg) translateY(-20px); } 100% { transform: translateX(-50%) rotate(360deg) translateY(-20px); } }
         @keyframes dataFlow { 0% { background-position: 0 -50px; } 100% { background-position: 0 50px; } }
 
-        /* --- TỐI ƯU HÓA RESPONSIVE CHO MOBILE BÉ LẠI --- */
+        /* --- TỐI ƯU HÓA RESPONSIVE CHO MOBILE --- */
         @media(max-width: 900px) { .grid-container { grid-template-columns: repeat(3, 1fr); } }
         @media(max-width: 600px) {
             .grid-container { grid-template-columns: repeat(2, 1fr); gap: 12px;}
@@ -200,7 +201,6 @@
             .signal-icon { font-size: 26px; margin-bottom: 10px; }
             .signal-name { font-size: 12px; }
             
-            /* Thu nhỏ thư trên mobile */
             #message-container { padding: 25px 20px; width: 95%; max-height: 88vh; border-radius: 15px;}
             .msg-title { font-size: 30px; margin-bottom: 15px; }
             .cosmic-term { font-size: 18px; margin-bottom: 12px; padding-bottom: 5px; }
@@ -261,7 +261,7 @@
         </center>
     </div>
 
-    <audio id="bg-music" loop preload="auto">
+    <audio id="bg-music" loop preload="auto" playsinline>
         <source src="nhacnen/nen.mp3" type="audio/mpeg">
     </audio>
 
@@ -301,7 +301,8 @@
 
         function renderCards() {
             const grid = document.getElementById('cards-grid');
-            const icons = ['fa-meteor', 'fa-user-astronaut', 'fa-moon', 'fa-rocket', 'fa-star', 'fa-satellite', 'fa-sun', 'fa-shuttle-space', 'fa-globe', 'fa-satellite-dish'];
+            // Đã đổi icon số 6 thành fa-compact-disc để phù hợp "Đĩa vàng Voyager" và sửa lỗi nhấp nháy
+            const icons = ['fa-meteor', 'fa-user-astronaut', 'fa-moon', 'fa-rocket', 'fa-star', 'fa-compact-disc', 'fa-sun', 'fa-shuttle-space', 'fa-globe', 'fa-satellite-dish'];
             
             for(let i = 0; i < 10; i++) {
                 let iconClass = icons[i]; 
@@ -315,7 +316,6 @@
             }
         }
 
-        // Tối ưu hóa: Giảm bớt số lượng sao xuống 100 để máy điện thoại không bị lag
         function generateGalaxy() {
             const container = document.getElementById('stars-layer');
             const colors = ['#ffffff', '#ffb7c5', '#cce0ff', '#fef08a'];
@@ -341,14 +341,20 @@
         const message = document.getElementById('message-container');
         const music = document.getElementById('bg-music');
 
-        document.body.addEventListener('click', function() {
+        // Khởi tạo nhạc với touchstart trên iPhone
+        function initAudio() {
             if (music && music.paused) {
-                music.volume = 0.8; music.play().catch(e => {});
+                music.volume = 0.8;
+                music.play().catch(e => console.log("Audio play blocked by browser:", e));
             }
-        }, { once: true });
+            document.body.removeEventListener('click', initAudio);
+            document.body.removeEventListener('touchstart', initAudio);
+        }
+        document.body.addEventListener('click', initAudio);
+        document.body.addEventListener('touchstart', initAudio);
 
         function enterGallery() {
-            if(music) { music.volume = 0.8; music.play().catch(e => console.log(e)); }
+            initAudio(); // Đảm bảo nhạc chắc chắn kêu khi bấm nút
             intro.style.opacity = "0";
             setTimeout(() => {
                 intro.style.display = "none";
@@ -415,7 +421,7 @@
             const toast = document.getElementById('feedback-toast');
             
             message.style.opacity = "0.2";
-            message.style.transform = "scale(0.95)";
+            message.style.transform = "scale(0.95) translateZ(0)";
 
             for(let i=0; i<35; i++) {
                 let heart = document.createElement('div');
@@ -437,7 +443,7 @@
                 setTimeout(() => {
                     message.style.display = "none";
                     message.style.opacity = "1"; 
-                    message.style.transform = "scale(0.8)";
+                    message.style.transform = "scale(0.8) translateZ(0)";
                     
                     gallery.style.display = "flex";
                     document.getElementById('percent-text').innerText = "0%";
