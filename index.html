@@ -3,160 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Women's Day 8/3 🌌</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;400;600&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>8/3 Galaxy Messages 🛰️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,500&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- TÔNG MÀU GALAXY VŨ TRỤ --- */
         :root {
-            --bg-deep: #0b0c10;
-            --nebula-pink: rgba(255, 105, 180, 0.15);
-            --nebula-purple: rgba(138, 43, 226, 0.15);
-            --nebula-blue: rgba(65, 105, 225, 0.15);
-            --text-light: #f8f9fa;
-            --accent-pink: #ff69b4;
-            --accent-gold: #ffd700;
+            --bg-deep: #050508; --nebula-pink: rgba(255, 105, 180, 0.25);
+            --nebula-purple: rgba(138, 43, 226, 0.25); --nebula-blue: rgba(65, 105, 225, 0.25);
+            --text-light: #f8f9fa; --accent-pink: #ff69b4; --tech-blue: #00f0ff; 
+            --tech-dark: rgba(15, 25, 45, 0.85); /* Đổi màu nền thẻ để mượt hơn */
         }
 
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
-            font-family: 'Quicksand', sans-serif;
-            background-color: var(--bg-deep);
-            color: var(--text-light);
-            overflow: hidden;
+            font-family: 'Quicksand', sans-serif; background-color: var(--bg-deep);
+            color: var(--text-light); overflow: hidden;
             display: flex; justify-content: center; align-items: center;
         }
 
-        /* --- HIỆU ỨNG VŨ TRỤ (BACKGROUND) --- */
+        /* --- BACKGROUND GALAXY --- */
         #galaxy-bg {
             position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0;
-            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-            overflow: hidden;
+            background: radial-gradient(ellipse at bottom, #101820 0%, #030305 100%); overflow: hidden;
         }
-
-        /* Mây tinh vân (Nebula) */
-        .nebula {
-            position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.6;
-            animation: floatNebula 20s infinite alternate ease-in-out;
-        }
-        .nebula-1 { width: 40vw; height: 40vw; background: var(--nebula-pink); top: -10%; left: -10%; }
-        .nebula-2 { width: 50vw; height: 50vw; background: var(--nebula-purple); bottom: -20%; right: -10%; animation-delay: -5s; }
-        .nebula-3 { width: 30vw; height: 30vw; background: var(--nebula-blue); top: 30%; left: 40%; animation-delay: -10s; }
-
-        @keyframes floatNebula {
-            0% { transform: scale(1) translate(0, 0); }
-            100% { transform: scale(1.2) translate(20px, -20px); }
-        }
-
-        /* Các vì sao */
-        .star {
-            position: absolute; background: white; border-radius: 50%;
-            box-shadow: 0 0 10px rgba(255,255,255,0.8);
-            animation: twinkle infinite alternate;
-        }
-        @keyframes twinkle { 0% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
-
-        /* Sao băng */
+        .nebula { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.8; animation: floatNebula 20s infinite alternate ease-in-out; mix-blend-mode: screen; }
+        .nebula-1 { width: 50vw; height: 50vw; background: var(--nebula-pink); top: -10%; left: -10%; }
+        .nebula-2 { width: 60vw; height: 60vw; background: var(--nebula-purple); bottom: -20%; right: -10%; animation-delay: -5s; }
+        /* Bỏ box-shadow ở sao tĩnh để tối ưu hiệu năng mobile */
+        .star { position: absolute; background: white; border-radius: 50%; animation: twinkle infinite alternate; }
+        
         .shooting-star {
-            position: absolute; width: 150px; height: 2px;
+            position: absolute; width: 180px; height: 2px;
             background: linear-gradient(90deg, rgba(255,255,255,1), transparent);
-            transform: rotate(-45deg);
-            animation: shoot 4s infinite linear; opacity: 0;
-            box-shadow: 0 0 20px #fff;
-        }
-        @keyframes shoot {
-            0% { transform: translateX(100vw) translateY(-20vh) rotate(-45deg); opacity: 1; }
-            100% { transform: translateX(-20vw) translateY(100vh) rotate(-45deg); opacity: 0; }
+            transform: rotate(-45deg); animation: shoot 2s infinite linear; opacity: 0;
+            box-shadow: 0 0 15px #fff; z-index: 15;
         }
 
-        /* --- MÀN HÌNH CHỜ (TÍN HIỆU TỪ VŨ TRỤ) --- */
+        @keyframes floatNebula { 0% { transform: scale(1) translate(0, 0); } 100% { transform: scale(1.2) translate(30px, -30px); } }
+        @keyframes twinkle { 0% { opacity: 0.2; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
+        @keyframes shoot { 0% { transform: translateX(100vw) translateY(-20vh) rotate(-45deg); opacity: 1; } 100% { transform: translateX(-20vw) translateY(100vh) rotate(-45deg); opacity: 0; } }
+
+        /* --- MÀN HÌNH CHỜ (INTRO) --- */
         #intro-screen {
-            position: absolute; z-index: 20; width: 100%; height: 100%;
+            position: absolute; z-index: 40; width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            background: rgba(9, 10, 15, 0.8); backdrop-filter: blur(5px);
-            transition: opacity 1.5s ease;
+            background: rgba(5, 5, 8, 0.85); backdrop-filter: blur(8px); transition: opacity 0.8s ease;
         }
+        .radar-box { text-align: center; animation: pulse 2s infinite; }
+        .radar-icon { font-size: 65px; color: var(--tech-blue); margin-bottom: 20px; text-shadow: 0 0 25px var(--tech-blue); }
+        .intro-text { font-family: 'Orbitron', sans-serif; font-size: 22px; letter-spacing: 2px; color: #e2e8f0; margin-bottom: 40px; text-transform: uppercase; text-align: center; padding: 0 20px;}
         
-        .radar-box {
+        .btn-action {
+            padding: 16px 55px; background: rgba(0, 240, 255, 0.1); border: 2px solid var(--tech-blue);
+            color: var(--text-light); border-radius: 5px; font-size: 18px; cursor: pointer;
+            transition: all 0.3s ease; font-family: 'Orbitron', sans-serif; letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4), inset 0 0 10px rgba(0, 240, 255, 0.2);
+            text-transform: uppercase; position: relative; overflow: hidden;
+        }
+        .btn-action:hover { background: var(--tech-blue); color: #000; box-shadow: 0 0 40px var(--tech-blue); transform: scale(1.05); }
+
+        /* --- KHO LƯU TRỮ TÍN HIỆU --- */
+        #gallery-screen {
+            display: none; position: absolute; z-index: 20; width: 90%; max-width: 1000px;
+            height: 80vh; flex-direction: column; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 1s ease;
+        }
+        .gallery-title {
+            font-family: 'Orbitron', sans-serif; font-size: 30px; color: var(--accent-pink);
+            text-shadow: 0 0 20px var(--accent-pink); margin-bottom: 40px; text-transform: uppercase; letter-spacing: 3px;
             text-align: center;
-            animation: pulse 2s infinite;
         }
+        .grid-container { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; width: 100%; }
         
-        .radar-icon { font-size: 50px; color: var(--accent-pink); margin-bottom: 20px; text-shadow: 0 0 20px var(--accent-pink); }
+        /* Đã bỏ backdrop-filter ở signal-card để chống lag trên điện thoại */
+        .signal-card {
+            background: var(--tech-dark); border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 12px; padding: 25px 10px; text-align: center; cursor: pointer;
+            transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+        }
+        .signal-card::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: 0.5s;
+        }
+        .signal-card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 240, 255, 0.3); border-color: #fff; }
+        .signal-card:hover::before { left: 100%; }
         
-        .intro-text {
-            font-size: 18px; letter-spacing: 2px; color: #ccc;
-            margin-bottom: 30px; text-transform: uppercase;
-        }
+        .signal-icon { font-size: 32px; color: var(--tech-blue); margin-bottom: 15px; filter: drop-shadow(0 0 8px var(--tech-blue)); }
+        .signal-name { font-family: 'Orbitron', sans-serif; font-size: 14px; letter-spacing: 1px; color: #fff; font-weight: bold;}
 
-        .btn-receive {
-            padding: 15px 40px; background: transparent;
-            border: 2px solid var(--accent-pink); color: var(--text-light);
-            border-radius: 50px; font-size: 16px; cursor: pointer;
-            transition: all 0.3s ease; font-weight: bold; letter-spacing: 1px;
-            box-shadow: 0 0 15px rgba(255, 105, 180, 0.3), inset 0 0 10px rgba(255, 105, 180, 0.3);
-        }
-        .btn-receive:hover {
-            background: var(--accent-pink); box-shadow: 0 0 30px var(--accent-pink);
-            transform: scale(1.05);
-        }
+        .signal-card.opened { border-color: var(--accent-pink); background: rgba(255, 105, 180, 0.15); box-shadow: inset 0 0 15px rgba(255, 105, 180, 0.2);}
+        .signal-card.opened .signal-icon { color: var(--accent-pink); filter: drop-shadow(0 0 10px var(--accent-pink)); }
 
-        @keyframes pulse { 0% { transform: scale(0.95); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(0.95); opacity: 0.8; } }
+        /* --- MÀN HÌNH TẢI DỮ LIỆU --- */
+        #loading-screen {
+            display: none; position: absolute; z-index: 30; width: 100%; height: 100%;
+            flex-direction: column; align-items: center; justify-content: center;
+            background: rgba(5, 5, 8, 0.9); transition: opacity 0.5s ease; backdrop-filter: blur(10px);
+        }
+        .satellite-container { position: relative; width: 150px; height: 150px; margin-bottom: 30px; }
+        .satellite-icon { font-size: 65px; color: var(--tech-blue); position: absolute; top: 0; left: 50%; transform: translateX(-50%); animation: orbit 2s infinite linear; text-shadow: 0 0 25px var(--tech-blue);}
+        .ground-station { font-size: 55px; color: var(--accent-pink); position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); text-shadow: 0 0 20px var(--accent-pink);}
+        .data-stream {
+            position: absolute; top: 60px; left: 50%; width: 4px; height: 50px; background: linear-gradient(to bottom, var(--tech-blue), var(--accent-pink));
+            transform: translateX(-50%); animation: dataFlow 0.6s infinite linear; opacity: 0.9; box-shadow: 0 0 10px #fff;
+        }
+        .loading-text { font-family: 'Orbitron', sans-serif; font-size: 22px; color: var(--tech-blue); letter-spacing: 3px; margin-top: 20px; text-shadow: 0 0 10px var(--tech-blue);}
+        .loading-percent { font-family: 'Orbitron', sans-serif; font-size: 50px; color: var(--text-light); font-weight: bold; margin-top: 10px; text-shadow: 0 0 20px #fff;}
 
-        /* --- THÔNG ĐIỆP CHÍNH (GLASSMORPHISM CARD) --- */
+        /* --- BỨC THƯ (GLASSMORPHISM CARD) --- */
         #message-container {
-            display: none; z-index: 10;
-            width: 700px; max-width: 90%;
-            background: rgba(20, 20, 35, 0.5);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 105, 180, 0.3);
-            border-radius: 20px; padding: 50px;
-            box-shadow: 0 0 40px rgba(255, 105, 180, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.05);
-            text-align: center;
-            opacity: 0; transform: scale(0.8);
-            transition: all 1.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            display: none; z-index: 25; width: 780px; max-width: 92%; max-height: 85vh; overflow-y: auto;
+            background: rgba(15, 20, 35, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 105, 180, 0.5); border-radius: 25px; padding: 45px 55px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 105, 180, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.1);
+            text-align: center; opacity: 0; transform: scale(0.8) translateY(20px);
+            transition: all 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28);
         }
-        .show-message { opacity: 1 !important; transform: scale(1) !important; }
-
-        .title {
-            font-family: 'Dancing Script', cursive; font-size: 45px;
-            background: linear-gradient(45deg, #ff69b4, #ff1493, #8a2be2);
+        .show-message { opacity: 1 !important; transform: scale(1) translateY(0) !important; }
+        
+        .msg-title {
+            font-family: 'Dancing Script', cursive; font-size: 46px;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #a1c4fd);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 20px; text-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+            margin-bottom: 25px; filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.4));
+        }
+        
+        .msg-content { font-size: 17px; line-height: 1.8; text-align: justify; color: #f8fafc; margin-bottom: 25px; min-height: 120px; }
+        
+        .cosmic-term {
+            font-family: 'Playfair Display', serif; color: var(--tech-blue);
+            font-size: 24px; font-weight: 600; text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.4); padding-bottom: 8px;
+            display: inline-block; margin-bottom: 18px; width: 100%; text-align: center;
         }
 
-        .subtitle {
-            font-family: 'Playfair Display', serif; font-style: italic; font-size: 20px;
-            color: var(--accent-gold); margin-bottom: 30px;
+        .msg-explanation {
+            background: rgba(0, 240, 255, 0.08); border-left: 4px solid var(--tech-blue);
+            padding: 15px 18px; margin-top: 20px; font-style: italic; color: #e0f2fe;
+            border-radius: 0 10px 10px 0; font-size: 15px; text-align: left;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.2);
         }
 
-        .content {
-            font-size: 16px; line-height: 1.8; text-align: justify;
-            color: #ddd; margin-bottom: 30px;
+        .msg-signature { font-family: 'Dancing Script', cursive; font-size: 26px; text-align: right; color: var(--accent-pink); border-top: 1px dashed rgba(255,255,255,0.3); padding-top: 20px; margin-top: 20px; text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);}
+        
+        /* Nút Gửi phản hồi */
+        .btn-feedback {
+            margin-top: 30px; padding: 14px 35px; 
+            background: linear-gradient(45deg, #ff1493, #ff69b4); border: none;
+            color: #fff; border-radius: 50px; cursor: pointer; font-family: 'Quicksand'; font-size: 17px; font-weight: bold; 
+            transition: 0.3s; box-shadow: 0 8px 20px rgba(255, 20, 147, 0.4);
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: auto;
+        }
+        .btn-feedback:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(255, 20, 147, 0.6); background: linear-gradient(45deg, #ff69b4, #ff1493); }
+        .btn-feedback i { font-size: 20px; animation: heartbeat 1.5s infinite; }
+
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+        /* --- HIỆU ỨNG TIM BAY VÀ THÔNG BÁO --- */
+        .floating-heart {
+            position: absolute; bottom: -50px; font-size: 28px;
+            animation: floatUp ease-in forwards; z-index: 100;
+            filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.8));
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-120vh) scale(1.5) rotate(360deg); opacity: 0; }
         }
 
-        .highlight { color: var(--accent-pink); font-weight: bold; }
-
-        .signature {
-            font-family: 'Dancing Script', cursive; font-size: 26px;
-            text-align: right; color: var(--accent-pink);
-            border-top: 1px dashed rgba(255,255,255,0.2); padding-top: 20px;
+        #feedback-toast {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8);
+            background: rgba(255, 105, 180, 0.95); color: white; padding: 25px 45px;
+            border-radius: 50px; font-family: 'Quicksand', sans-serif; font-size: 20px; font-weight: bold;
+            box-shadow: 0 0 40px rgba(255, 105, 180, 0.8), inset 0 0 20px rgba(255,255,255,0.3);
+            opacity: 0; z-index: 200; pointer-events: none; text-align: center;
+            transition: all 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
         }
+        #feedback-toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
-        /* Hình ảnh hành tinh trang trí nhỏ */
-        .planet {
-            position: absolute; width: 60px; height: 60px;
-            border-radius: 50%; opacity: 0.8; pointer-events: none;
-        }
-        .planet-1 { top: -30px; left: -30px; background: radial-gradient(circle at 30% 30%, #ff9a9e, #fecfef); box-shadow: 0 0 20px #ff9a9e; animation: floatObj 6s infinite ease-in-out; }
-        .planet-2 { bottom: -20px; right: -20px; width: 40px; height: 40px; background: radial-gradient(circle at 30% 30%, #a18cd1, #fbc2eb); box-shadow: 0 0 15px #a18cd1; animation: floatObj 8s infinite ease-in-out reverse; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 105, 180, 0.5); border-radius: 10px; }
 
-        @keyframes floatObj { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-15px) rotate(10deg); } }
+        @keyframes pulse { 0%, 100% { transform: scale(0.95); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } }
+        @keyframes orbit { 0% { transform: translateX(-50%) rotate(0deg) translateY(-20px); } 50% { transform: translateX(-50%) rotate(180deg) translateY(-20px); } 100% { transform: translateX(-50%) rotate(360deg) translateY(-20px); } }
+        @keyframes dataFlow { 0% { background-position: 0 -50px; } 100% { background-position: 0 50px; } }
 
-        @media(max-width: 768px) {
-            #message-container { padding: 30px; }
-            .title { font-size: 35px; }
-            .content { font-size: 14px; }
+        /* --- TỐI ƯU HÓA RESPONSIVE CHO MOBILE BÉ LẠI --- */
+        @media(max-width: 900px) { .grid-container { grid-template-columns: repeat(3, 1fr); } }
+        @media(max-width: 600px) {
+            .grid-container { grid-template-columns: repeat(2, 1fr); gap: 12px;}
+            #gallery-screen { height: auto; padding: 20px 0; width: 95%;}
+            .gallery-title { font-size: 22px; margin-bottom: 25px; }
+            .signal-card { padding: 15px 5px; }
+            .signal-icon { font-size: 26px; margin-bottom: 10px; }
+            .signal-name { font-size: 12px; }
+            
+            /* Thu nhỏ thư trên mobile */
+            #message-container { padding: 25px 20px; width: 95%; max-height: 88vh; border-radius: 15px;}
+            .msg-title { font-size: 30px; margin-bottom: 15px; }
+            .cosmic-term { font-size: 18px; margin-bottom: 12px; padding-bottom: 5px; }
+            .msg-content { font-size: 14px; line-height: 1.6; margin-bottom: 15px; min-height: auto;}
+            .msg-explanation { font-size: 13px; padding: 12px; margin-top: 15px; }
+            .msg-signature { font-size: 20px; padding-top: 15px; margin-top: 15px; }
+            
+            .btn-feedback { font-size: 14px; padding: 12px 20px; width: 100%; margin-top: 20px;}
+            #feedback-toast { font-size: 15px; padding: 15px 20px; width: 85%;}
+            .radar-icon { font-size: 45px; }
+            .intro-text { font-size: 16px; }
+            .btn-action { padding: 12px 30px; font-size: 15px; }
         }
     </style>
 </head>
@@ -165,34 +221,44 @@
     <div id="galaxy-bg">
         <div class="nebula nebula-1"></div>
         <div class="nebula nebula-2"></div>
-        <div class="nebula nebula-3"></div>
         <div id="stars-layer"></div>
     </div>
+
+    <div id="feedback-toast">Trạm mặt đất đã nhận được tín hiệu yêu thương! 🥰🚀</div>
 
     <div id="intro-screen">
         <div class="radar-box">
             <i class="fas fa-satellite-dish radar-icon"></i>
-            <div class="intro-text">Trạm vũ trụ phát hiện 1 thông điệp mới...</div>
+            <div class="intro-text">Hệ thống phát hiện 10 thông điệp lãng mạn từ vũ trụ</div>
         </div>
-        <button class="btn-receive" onclick="openMessage()">Kết nối và Nhận</button>
+        <button class="btn-action" onclick="enterGallery()">Giải mã toàn bộ tín hiệu</button>
+    </div>
+
+    <div id="gallery-screen">
+        <div class="gallery-title">Kho Lưu Trữ Thông Điệp 8/3</div>
+        <div class="grid-container" id="cards-grid"></div>
+    </div>
+
+    <div id="loading-screen">
+        <div class="satellite-container">
+            <i class="fas fa-satellite satellite-icon"></i>
+            <div class="data-stream"></div>
+            <i class="fas fa-broadcast-tower ground-station"></i>
+        </div>
+        <div class="loading-text" id="loading-signal-name">ĐANG TẢI DỮ LIỆU...</div>
+        <div class="loading-percent" id="percent-text">0%</div>
     </div>
 
     <div id="message-container">
-        <div class="planet planet-1"></div>
-        <div class="planet planet-2"></div>
+        <div class="msg-title">Happy Women's Day! 🌸</div>
+        <div class="msg-content" id="wish-content"></div>
+        <div class="msg-signature">From: Hội anh em CLB Không gian 🚀</div>
         
-        <div class="title">Happy Women's Day! 🌸</div>
-        <div class="subtitle">"Gửi những vì sao rực rỡ nhất vũ trụ của chúng tớ..."</div>
-        
-        <div class="content">
-            <p>Nhân ngày Quốc tế Phụ nữ 8/3, thay mặt các bạn nam trong <span class="highlight">Câu lạc bộ Hàng không Vũ trụ</span>, chúc một nửa xinh đẹp của thế giới luôn tỏa sáng, rạng rỡ và tràn đầy năng lượng.</p>
-            <p>Vũ trụ có hàng tỷ vì sao, nhưng sự góp mặt của các cậu mới chính là lực hấp dẫn tuyệt vời nhất giữ cho bầu không khí của câu lạc bộ luôn sôi nổi và ấm áp. Dù là trong những dòng code phức tạp, những bản thiết kế mô hình hay những buổi làm việc căng thẳng, nụ cười của các cậu luôn là quỹ đạo bình yên nhất.</p>
-            <p>Chúc các cậu mãi mãi là những vì sao độc nhất vô nhị, thỏa sức bay cao và vươn xa đến những thiên hà mà các cậu hằng mơ ước! 🚀✨</p>
-        </div>
-
-        <div class="signature">
-            From: Hội anh em CLB Hàng không Vũ trụ
-        </div>
+        <center>
+            <button class="btn-feedback" onclick="sendFeedback()">
+                <i class="fas fa-heart"></i> Gửi tín hiệu phản hồi về Trái Đất
+            </button>
+        </center>
     </div>
 
     <audio id="bg-music" loop preload="auto">
@@ -200,84 +266,184 @@
     </audio>
 
     <script>
-        // --- TẠO HỆ THỐNG CÁC VÌ SAO ---
+        // --- 10 LỜI CHÚC ẨN DỤ VŨ TRỤ ---
+        const wishes = [
+            `<span class="cosmic-term">🪐 Chân trời sự kiện (Event Horizon)</span>
+            Trong vật lý thiên văn, "Chân trời sự kiện" là ranh giới của một lỗ đen, nơi mà lực hấp dẫn mạnh đến mức không gì thoát ra được, kể cả ánh sáng. Sự đáng yêu và năng lượng của cậu cũng giống như vậy. Ai lỡ bước vào quỹ đạo của cậu đều bị thu hút vô điều kiện. Nhân ngày 8/3, chúc cậu luôn giữ được sức hút tuyệt vời ấy!`,
+
+            `<span class="cosmic-term">☄️ Hỗ trợ hấp dẫn (Gravity Assist)</span>
+            Các tàu vũ trụ thường mượn lực hấp dẫn của hành tinh lớn để "ná thun" bay xa hơn mà không tốn nhiên liệu. Đối với CLB, cậu chính là bệ phóng năng lượng đó. Nhờ nụ cười của cậu, anh em như được tiếp thêm lực đẩy để vươn xa. 8/3 này, chúc "trạm sạc năng lượng" của chúng tớ luôn xinh đẹp, bình an!`,
+
+            `<span class="cosmic-term">✨ Siêu tân tinh (Supernova)</span>
+            Siêu tân tinh là vụ nổ huy hoàng nhất trong vũ trụ, đánh dấu khoảnh khắc rực rỡ nhất của một vì sao, gieo mầm cho tinh tú mới. Sự nhiệt huyết của cậu cũng bùng nổ hệt như vậy, thắp sáng cả những ngày làm deadline u ám. Chúc cậu 8/3 ngập tràn niềm vui và giữ mãi ngọn lửa nhiệt huyết!`,
+
+            `<span class="cosmic-term">🌌 Tinh vân (Nebula)</span>
+            Tinh vân được ví như "vườn ươm sao", nơi mây bụi khí cuộn trào ươm mầm cho các vì sao rực rỡ. Cậu mang trong mình sự dịu dàng, ân cần hệt như những đám mây đó. Nhờ sự khéo léo của cậu, ý tưởng non nớt của mọi người mới thành hình. Chúc cậu 8/3 ấm áp, luôn là nơi chốn bình yên nhất vũ trụ này!`,
+
+            `<span class="cosmic-term">⚖️ Điểm Lagrange (Lagrange Point)</span>
+            Điểm Lagrange là những vị trí hiếm hoi nơi lực hấp dẫn cân bằng tuyệt đối, tạo ra sự ổn định hoàn hảo. Giữa những chuỗi ngày chạy đồ án rối ren, sự điềm tĩnh và nhẹ nhàng của cậu chính là "Điểm Lagrange" giúp cả team tìm lại cân bằng. 8/3 chúc cậu luôn an yên trong tâm hồn và mỉm cười rạng rỡ!`,
+
+            `<span class="cosmic-term">💿 Đĩa vàng Voyager (Golden Record)</span>
+            Tàu Voyager mang theo chiếc đĩa vàng chứa đựng tinh túy nhân loại bay vào không gian tìm tri kỷ. Nếu CLB phải gửi một thông điệp đại diện ra vũ trụ, đó chắc chắn là nụ cười của cậu. Cậu là giai điệu đẹp nhất mà bọn tớ được đồng hành. Chúc cậu 8/3 thật nhiều niềm vui!`,
+
+            `<span class="cosmic-term">🌠 Cực quang (Aurora)</span>
+            Cực quang sinh ra khi gió Mặt Trời va chạm từ trường Trái Đất, biến bức xạ thành dải lụa ánh sáng huyền ảo. Cậu cũng có siêu năng lực ấy! Biết biến áp lực thành khoảnh khắc nhẹ nhàng, rực rỡ sắc màu. Chúc dải lụa ánh sáng của chúng tớ có một ngày 8/3 trọn vẹn và hạnh phúc!`,
+
+            `<span class="cosmic-term">🌑 Vật chất tối (Dark Matter)</span>
+            Vật chất tối vô hình nhưng lại tạo ra lực hấp dẫn giữ cho thiên hà không vỡ vụn. Giống như cậu, đôi khi chỉ thầm lặng hỗ trợ phía sau, nhưng cống hiến và sự quan tâm tinh tế của cậu là keo kết dính giữ CLB vững mạnh. Cảm ơn cậu vì tất cả, Happy Women's Day!`,
+
+            `<span class="cosmic-term">🌞 Nhật thực toàn phần (Total Solar Eclipse)</span>
+            Nhật thực toàn phần là lúc Mặt Trăng nhỏ bé che khuất Mặt Trời khổng lồ, tạo ra quầng sáng tuyệt mỹ. Cậu bé nhỏ, dịu dàng nhưng mang sức mạnh phi thường xua tan mỏi mệt và thu hút mọi ánh nhìn. Chúc cậu 8/3 luôn tự tự tin, kiêu hãnh và rực rỡ theo cách độc nhất!`,
+
+            `<span class="cosmic-term">🔭 Kính viễn vọng Không gian (Space Telescope)</span>
+            Kính viễn vọng bay bám quỹ đạo, lặng lẽ vượt sương mù chụp lại vẻ đẹp vũ trụ. Ánh mắt tinh tế của cậu cũng vậy, luôn nhìn thấu nỗ lực của mọi người và mang đến lời động viên chân thành nhất. 8/3 này, mong cậu luôn thấy những điều tốt đẹp nhất và được đáp lại bằng vô vàn yêu thương!`
+        ];
+
+        function renderCards() {
+            const grid = document.getElementById('cards-grid');
+            const icons = ['fa-meteor', 'fa-user-astronaut', 'fa-moon', 'fa-rocket', 'fa-star', 'fa-satellite', 'fa-sun', 'fa-shuttle-space', 'fa-globe', 'fa-satellite-dish'];
+            
+            for(let i = 0; i < 10; i++) {
+                let iconClass = icons[i]; 
+                let numStr = (i + 1).toString().padStart(2, '0');
+                grid.innerHTML += `
+                    <div class="signal-card" id="card-${i}" onclick="openSignal(${i}, '${numStr}')">
+                        <i class="fas ${iconClass} signal-icon"></i>
+                        <div class="signal-name">TÍN HIỆU #${numStr}</div>
+                    </div>
+                `;
+            }
+        }
+
+        // Tối ưu hóa: Giảm bớt số lượng sao xuống 100 để máy điện thoại không bị lag
         function generateGalaxy() {
             const container = document.getElementById('stars-layer');
-            const colors = ['#ffffff', '#ffb7c5', '#cce0ff', '#f3ccff']; // Trắng, hồng nhạt, xanh nhạt, tím nhạt
-            
-            // Tạo 200 ngôi sao tĩnh
-            for (let i = 0; i < 200; i++) {
-                let star = document.createElement('div');
-                star.className = 'star';
-                // Kích thước ngẫu nhiên từ 1px đến 3px
-                let size = Math.random() * 2 + 1; 
-                star.style.width = size + 'px';
-                star.style.height = size + 'px';
-                star.style.left = Math.random() * 100 + 'vw';
-                star.style.top = Math.random() * 100 + 'vh';
+            const colors = ['#ffffff', '#ffb7c5', '#cce0ff', '#fef08a'];
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement('div'); star.className = 'star';
+                let size = Math.random() * 2 + 1; star.style.width = size + 'px'; star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + 'vw'; star.style.top = Math.random() * 100 + 'vh';
                 star.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                // Hiệu ứng nhấp nháy
-                star.style.animationDuration = (Math.random() * 3 + 1.5) + 's';
-                star.style.animationDelay = (Math.random() * 5) + 's';
-                
+                star.style.animationDuration = (Math.random() * 3 + 1) + 's';
+                star.style.animationDelay = (Math.random() * 2) + 's';
                 container.appendChild(star);
             }
-
-            // Tạo sao băng lướt qua màn hình
-            setInterval(() => {
-                let shootingStar = document.createElement('div');
-                shootingStar.className = 'shooting-star';
-                shootingStar.style.top = (Math.random() * 50) + 'vh';
-                shootingStar.style.animationDuration = (Math.random() * 1.5 + 2) + 's';
-                container.appendChild(shootingStar);
-                
-                // Xóa sao băng sau khi bay xong
-                setTimeout(() => shootingStar.remove(), 4000);
-            }, 3000); // 3 giây xuất hiện 1 sao băng
         }
 
         window.onload = () => {
             generateGalaxy();
+            renderCards();
         };
 
-        // --- XỬ LÝ KHI CLICK NÚT NHẬN THÔNG ĐIỆP ---
-        function openMessage() {
-            const intro = document.getElementById('intro-screen');
-            const message = document.getElementById('message-container');
-            const music = document.getElementById('bg-music');
+        const intro = document.getElementById('intro-screen');
+        const gallery = document.getElementById('gallery-screen');
+        const loading = document.getElementById('loading-screen');
+        const message = document.getElementById('message-container');
+        const music = document.getElementById('bg-music');
 
-            // 1. Phát nhạc nền
-            if(music) {
-                music.volume = 0.8;
-                music.play().catch(e => console.log("Cần tương tác để phát nhạc: ", e));
+        document.body.addEventListener('click', function() {
+            if (music && music.paused) {
+                music.volume = 0.8; music.play().catch(e => {});
             }
+        }, { once: true });
 
-            // 2. Mờ dần màn hình Intro
+        function enterGallery() {
+            if(music) { music.volume = 0.8; music.play().catch(e => console.log(e)); }
             intro.style.opacity = "0";
-            
-            // 3. Chuyển cảnh sang bảng Message
             setTimeout(() => {
                 intro.style.display = "none";
+                gallery.style.display = "flex";
+                setTimeout(() => { gallery.style.opacity = "1"; }, 100);
+            }, 800);
+        }
+
+        function openSignal(index, numStr) {
+            document.getElementById('loading-signal-name').innerText = `ĐANG TẢI TÍN HIỆU #${numStr}...`;
+            gallery.style.opacity = "0";
+            setTimeout(() => {
+                gallery.style.display = "none";
+                loading.style.display = "flex";
+                loading.style.opacity = "1";
+                simulateLoading(index);
+            }, 500);
+        }
+
+        function simulateLoading(index) {
+            let progress = 0;
+            const percentText = document.getElementById('percent-text');
+            const interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 8) + 2; 
+                if (progress > 100) progress = 100;
+                percentText.innerText = progress + "%";
+                if (progress === 100) {
+                    clearInterval(interval);
+                    setTimeout(() => showMessage(index), 600);
+                }
+            }, 50);
+        }
+
+        function shootStars() {
+            const container = document.getElementById('stars-layer');
+            for(let i=0; i<10; i++) {
+                setTimeout(() => {
+                    let ss = document.createElement('div');
+                    ss.className = 'shooting-star';
+                    ss.style.top = (Math.random() * 70) + 'vh';
+                    ss.style.animationDuration = (Math.random() * 1.5 + 1) + 's';
+                    container.appendChild(ss);
+                    setTimeout(() => ss.remove(), 2500);
+                }, i * 250);
+            }
+        }
+
+        function showMessage(index) {
+            document.getElementById('wish-content').innerHTML = wishes[index];
+            document.getElementById(`card-${index}`).classList.add('opened');
+            document.getElementById(`card-${index}`).querySelector('.signal-name').innerText = "ĐÃ GIẢI MÃ";
+
+            loading.style.opacity = "0";
+            setTimeout(() => {
+                loading.style.display = "none";
                 message.style.display = "block";
-                
-                // Trigger reflow để animation phóng to mượt mà
                 void message.offsetWidth; 
                 message.classList.add('show-message');
+                shootStars();
+            }, 500);
+        }
+
+        function sendFeedback() {
+            const toast = document.getElementById('feedback-toast');
+            
+            message.style.opacity = "0.2";
+            message.style.transform = "scale(0.95)";
+
+            for(let i=0; i<35; i++) {
+                let heart = document.createElement('div');
+                heart.innerHTML = ['💖', '✨', '🚀', '💕', '🌸'][Math.floor(Math.random()*5)];
+                heart.className = 'floating-heart';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+                document.body.appendChild(heart);
                 
-                // Tạo một cơn mưa sao băng nhỏ ngay khi mở thiệp (Hiệu ứng thêm)
-                for(let i=0; i<5; i++) {
-                    setTimeout(() => {
-                        let ss = document.createElement('div');
-                        ss.className = 'shooting-star';
-                        ss.style.top = (Math.random() * 40) + 'vh';
-                        ss.style.animationDuration = '2s';
-                        document.getElementById('stars-layer').appendChild(ss);
-                        setTimeout(() => ss.remove(), 2000);
-                    }, i * 400);
-                }
+                setTimeout(() => heart.remove(), 3500);
+            }
+
+            setTimeout(() => { toast.classList.add('show'); }, 500);
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+                message.classList.remove('show-message');
                 
-            }, 1000); // Đợi 1 giây để màn intro mờ hẳn
+                setTimeout(() => {
+                    message.style.display = "none";
+                    message.style.opacity = "1"; 
+                    message.style.transform = "scale(0.8)";
+                    
+                    gallery.style.display = "flex";
+                    document.getElementById('percent-text').innerText = "0%";
+                    setTimeout(() => { gallery.style.opacity = "1"; }, 50);
+                }, 600);
+            }, 3000);
         }
     </script>
 </body>
