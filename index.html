@@ -135,7 +135,6 @@
     <script>
         const bgMusic = document.getElementById("bgMusic");
 
-        // Thay đổi 2: Ép tải lại (load) trước khi phát (play)
         function startJourney() {
             bgMusic.load(); // Bắt buộc điện thoại nạp file nhạc
             bgMusic.play().catch(e => console.log("Lỗi trình duyệt:", e));
@@ -216,7 +215,6 @@
 
         function checkPassword() {
             if (currentPass === "yeuac") {
-                // Nhồi thêm một lệnh play ở đây lỡ lúc nãy nó chưa kêu
                 if (bgMusic.paused) {
                     bgMusic.play().catch(e => console.log(e));
                 }
@@ -242,3 +240,4 @@
     </script>
 </body>
 </html>
+
