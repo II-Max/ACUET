@@ -2,242 +2,112 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Thư Gửi Từ Các Vì Sao - CLB Hàng không Vũ trụ</title>
-    <style>
-        body { margin: 0; padding: 0; background: radial-gradient(circle at center, #1b0c26 0%, #05070a 100%); color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; }
-        .screen { display: none; flex-direction: column; align-items: center; z-index: 10; width: 100%; padding: 15px; box-sizing: border-box; }
-        .active { display: flex; }
-        
-        #introScreen { animation: cinematicFadeIn 2.5s ease-out forwards; }
-        @keyframes cinematicFadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-
-        .intro-text { font-size: 36px; color: #fff; text-shadow: 0 0 20px #ff69b4; font-style: italic; margin-bottom: 30px; animation: pulseText 2s infinite alternate; padding: 0 10px; }
-        @keyframes pulseText { from { text-shadow: 0 0 10px #ff69b4; transform: scale(0.98); } to { text-shadow: 0 0 25px #ffb6c1; transform: scale(1.02); } }
-        
-        .continue-btn { opacity: 0; padding: 12px 35px; font-size: 20px; background: rgba(255, 105, 180, 0.1); color: #ffb6c1; border: 2px solid #ff69b4; border-radius: 30px; cursor: pointer; transition: 0.4s; font-weight: bold; letter-spacing: 2px; backdrop-filter: blur(5px); box-shadow: 0 0 15px rgba(255, 105, 180, 0.3); animation: buttonFadeIn 1.5s ease-out 1s forwards; }
-        @keyframes buttonFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .continue-btn:hover { background: #ff69b4; color: #fff; box-shadow: 0 0 25px #ff69b4; transform: scale(1.1); }
-
-        .floating-item { position: absolute; font-size: 45px; opacity: 0.3; z-index: 0; animation: floatAround 20s infinite ease-in-out alternate; pointer-events: none; }
-        @keyframes floatAround { 0% { transform: translate(0, 0) rotate(0deg); } 50% { transform: translate(40px, -40px) rotate(15deg); } 100% { transform: translate(-20px, 30px) rotate(-10deg); } }
-
-        .fade-in-screen { animation: fadeIn 1s ease-in-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        
-        h2 { margin-bottom: 10px; }
-        
-        #passDisplay { font-size: 28px; color: #ffb6c1; letter-spacing: 5px; margin: 10px 0 15px 0; padding: 10px 20px; border: 2px solid #ff69b4; border-radius: 8px; min-width: 150px; min-height: 35px; background: rgba(255, 105, 180, 0.1); font-family: monospace; box-shadow: 0 0 15px rgba(255, 105, 180, 0.3); }
-        .keypad-container { background-color: rgba(26, 15, 30, 0.8); padding: 25px; border-radius: 12px; border: 1px solid #ff69b4; box-shadow: 0 0 25px rgba(255, 105, 180, 0.2); backdrop-filter: blur(5px); max-width: 100%; box-sizing: border-box; }
-        .keyboard { display: flex; flex-direction: column; gap: 8px; align-items: center; margin-bottom: 20px; }
-        .key-row { display: flex; gap: 8px; justify-content: center; }
-        .key { padding: 10px 0; width: 45px; height: 45px; cursor: pointer; background-color: #2d1b36; color: #ffb6c1; border: 1px solid #ff69b4; border-radius: 8px; font-size: 16px; font-weight: bold; transition: 0.3s; box-sizing: border-box; display: flex; justify-content: center; align-items: center; }
-        .key:active { background-color: #ff69b4; color: #fff; transform: scale(0.9); }
-        .action-row { display: flex; justify-content: center; gap: 15px; width: 100%; }
-        .key.action-btn { width: 120px; border-radius: 20px; background-color: #ff69b4; color: white; border: none; }
-        .error { color: #ff4c4c; display: none; font-size: 14px; margin-bottom: 15px; font-weight: bold; }
-
-        .shooting-star { position: absolute; top: -50px; left: 110%; width: 300px; height: 3px; background: linear-gradient(90deg, rgba(255,182,193,1), rgba(255,182,193,0)); transform: rotate(-45deg); display: none; box-shadow: 0 0 20px #ffb6c1; z-index: 20; }
-        @keyframes shooting { 0% { left: 110%; top: -50px; } 100% { left: -10%; top: 100vh; } }
-        #star-field { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; z-index: 1; }
-        .twinkle-star { position: absolute; border-radius: 50%; background-color: rgba(255, 182, 193, 0.9); animation: twinkle var(--duration) linear infinite; }
-        @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.5); } }
-
-        .choice-container { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 20px; width: 100%; }
-        .choice-btn { background: rgba(45, 27, 54, 0.8); border: 2px solid #ff69b4; color: #ffe4e1; padding: 15px 20px; border-radius: 15px; font-size: 18px; cursor: pointer; transition: 0.4s; backdrop-filter: blur(10px); display: flex; flex-direction: column; align-items: center; gap: 10px; width: 160px; font-weight: bold; }
-        .choice-btn:active { transform: scale(0.95); }
-        .choice-icon { font-size: 35px; }
-
-        .letter-card { background: rgba(30, 15, 40, 0.7); backdrop-filter: blur(15px); border: 1px solid rgba(255, 105, 180, 0.5); padding: 30px; border-radius: 15px; max-width: 700px; width: 90%; box-shadow: 0 0 40px rgba(255, 105, 180, 0.3); text-align: left; animation: floatingLetter 6s ease-in-out infinite; max-height: 75vh; overflow-y: auto; }
-        .letter-card::-webkit-scrollbar { width: 6px; }
-        .letter-card::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); border-radius: 10px; }
-        .letter-card::-webkit-scrollbar-thumb { background: #ff69b4; border-radius: 10px; }
-
-        @keyframes floatingLetter { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
-        .letter-title { color: #ff69b4; font-size: 24px; font-weight: bold; text-align: center; margin-bottom: 20px; text-shadow: 0 0 10px rgba(255, 105, 180, 0.5); border-bottom: 1px dashed #ffb6c1; padding-bottom: 15px;}
-        .letter-content { font-size: 17px; color: #ffe4e1; line-height: 1.6; }
-        .letter-content p { margin-bottom: 12px; }
-        .highlight { color: #ffb6c1; font-weight: bold; font-style: italic; }
-        
-        .astronomy-note { margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255, 105, 180, 0.3); font-size: 14px; color: #dda0dd; font-style: normal; line-height: 1.5; background: rgba(0, 0, 0, 0.2); padding: 12px; border-radius: 8px; }
-        .astronomy-note strong { color: #ff69b4; }
-
-        .back-btn { margin-top: 20px; padding: 10px 20px; font-size: 16px; background: rgba(255, 105, 180, 0.1); color: #ffb6c1; border: 1px solid #ff69b4; border-radius: 20px; cursor: pointer; transition: 0.3s; display: block; margin-left: auto; margin-right: auto; }
-        
-        @media (max-width: 600px) {
-            .intro-text { font-size: 26px; }
-            .floating-item { font-size: 30px; }
-            h2 { font-size: 20px; }
-            #passDisplay { font-size: 22px; padding: 8px 15px; min-height: 25px; }
-            .keypad-container { padding: 15px; }
-            .keyboard { gap: 5px; }
-            .key-row { gap: 4px; }
-            .key { width: 30px; height: 38px; font-size: 14px; border-radius: 5px; }
-            .action-row { gap: 10px; }
-            .key.action-btn { width: auto; flex: 1; padding: 10px; font-size: 13px; }
-            .choice-container { flex-direction: column; align-items: center; gap: 12px; }
-            .choice-btn { width: 90%; max-width: 300px; padding: 12px; flex-direction: row; justify-content: center; font-size: 16px; }
-            .choice-icon { font-size: 24px; }
-            .letter-card { padding: 20px; width: 95%; max-height: 70vh; animation: none; }
-            .letter-title { font-size: 20px; margin-bottom: 15px; padding-bottom: 10px; }
-            .letter-content { font-size: 15px; }
-            .astronomy-note { font-size: 13px; padding: 10px; }
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc mừng sinh nhật chị Lý 🎂</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts cho phong cách Vintage đa dạng -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Lora:ital,wght@0,400;1,400&family=Dancing+Script:wght@500;700&family=Merriweather:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="vintage-container">
+        <!-- Phần Tiêu đề -->
+        <header class="hero">
+            <div class="floral-decoration top">🍃 🌸 🍃</div>
+            <h1>Chúc Mừng Sinh Nhật Chị Lý</h1>
+            <p class="subtitle">20.05.2005 - Đón tuổi 21 rực rỡ và bình an!</p>
+            <div class="floral-decoration bottom">🍃 🌸 🍃</div>
+        </header>
 
-    <audio id="bgMusic" src="nhacnen/nen.mp3" loop preload="auto"></audio>
-
-    <div class="floating-item" style="top: 15%; left: 10%; animation-duration: 18s;">🪐</div>
-    <div class="floating-item" style="top: 70%; left: 85%; animation-duration: 25s; font-size: 60px;">👩‍🚀</div>
-    <div class="floating-item" style="top: 80%; left: 15%; animation-duration: 22s;">🛰️</div>
-    <div class="floating-item" style="top: 25%; left: 80%; animation-duration: 19s;">🛸</div>
-
-    <div id="introScreen" class="screen active">
-        <h1 class="intro-text">"A Smile can change someone's whole day"</h1>
-        <button class="continue-btn" onclick="startJourney()">Tiếp tục ✨</button>
-    </div>
-
-    <div id="welcomeScreen" class="screen">
-        <h2 style="color: #ffb6c1; text-shadow: 0 0 10px #ff69b4;">🌌 Trạm Nhận Thông Điệp 8/3 🌌</h2>
-        <div id="passDisplay"></div>
-        <p id="errorMsg" class="error">Mật mã chưa đúng nha!</p>
-        <div class="keypad-container">
-            <div id="keyboard" class="keyboard"></div>
-            <div class="action-row">
-                <button class="key action-btn" onclick="clearPass()">XÓA</button>
-                <button class="key action-btn" onclick="checkPassword()">MỞ CHUẨN ĐÍCH</button>
+        <!-- Phần Bức thư -->
+        <section class="letter-section">
+            <div class="interactive-envelope" id="envelope">
+                <div class="envelope-cover">
+                    <span>Mở thư em gửi 💌</span>
+                </div>
             </div>
-        </div>
+            
+            <div class="letter-content hidden" id="letter">
+                <div class="paper">
+                    <h2>Gửi người chị tuyệt vời nhất quả đất,</h2>
+                    <p>Chị Lý à,</p>
+                    <p>Hôm nay là sinh nhật lần thứ 21 của chị. Dù bình thường em là một đứa em siêu quậy, hay chọc ghẹo làm chị bực mình, nhưng sâu thẳm trong lòng, em luôn biết chị yêu thương gia đình và bao dung cho em rất nhiều.</p>
+                    <p>Chị là một người vô cùng quan trọng đối với em và cả nhà. Tuổi mới, em chúc chị luôn xinh đẹp, hạnh phúc, sớm đạt được mọi ước mơ và... bớt phải "đau đầu" vì đứa em này nhé! 💖</p>
+                    <p>Thương chị nhiều lắm!</p>
+                    <p class="signature">- Đứa em nghịch ngợm của chị -</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phần Góc kỷ niệm Polaroid -->
+        <section class="gallery">
+            <!-- Vùng chứa đốm sáng ký ức rơi lả tả -->
+            <div class="memory-dust-container" id="dust-container"></div>
+            
+            <h2 class="gallery-title">Góc Kỷ Niệm Nhỏ Của Chị Em Mình</h2>
+            <p class="instruction">(Cậu hãy lưu 10 ảnh vào thư mục 'images' với tên từ anh1.jpg đến anh10.jpg nhé!)</p>
+            
+            <div class="polaroid-container">
+                <!-- Hàng 1: 3 ảnh nhỏ -->
+                <div class="polaroid tilt-left">
+                    <div class="photo-placeholder"><img src="images/anh1.jpg" alt="Kỷ niệm 1" onerror="this.style.display='none'"><span class="placeholder-text">Ảnh 1</span></div>
+                    <div class="caption">Ngày xửa ngày xưa</div>
+                </div>
+                <div class="polaroid tilt-right-slight">
+                    <div class="photo-placeholder"><img src="images/anh2.jpg" alt="Kỷ niệm 2" onerror="this.style.display='none'"><span class="placeholder-text">Ảnh 2</span></div>
+                    <div class="caption">Chị Lý xinh xắn</div>
+                </div>
+                <div class="polaroid tilt-left-slight">
+                    <div class="photo-placeholder"><img src="images/anh3.jpg" alt="Kỷ niệm 3" onerror="this.style.display='none'"><span class="placeholder-text">Ảnh 3</span></div>
+                    <div class="caption">Cười tít mắt</div>
+                </div>
+
+                <!-- Hàng 2: 2 ảnh ĐIỂM NHẤN (Siêu to, chiếm 1 hàng) -->
+                <div class="polaroid highlight tilt-right">
+                    <div class="photo-placeholder"><img src="images/anh4.jpg" alt="Kỷ niệm 4" onerror="this.style.display='none'"><span class="placeholder-text">Ảnh 4 (Điểm nhấn)</span></div>
+                    <div class="caption">Gia đình yêu thương</div>
+                </div>
+                <div class="polaroid highlight tilt-left">
+                    <div class="photo-placeholder"><img src="images/anh5.jpg" alt="Kỷ niệm 5" onerror="this.style.display='none'"><span class="placeholder-text">Ảnh 5 (Điểm nhấn)</span></div>
+                    <div class="caption">Khoảnh khắc trân quý</div>
+                </div>
+
+                <!-- Hàng 3: 3 ảnh nhỏ -->
+                <div class="polaroid tilt-straight">
+                    <div class="photo-placeholder"><img src="images/anh6.jpg" alt="Kỷ niệm 6" onerror="this.style.display='none'"><span class="placeholder-text">Ảnh 6</span></div>
+                    <div class="caption">Đi chơi vui nè</div>
+                </div>
+                <div class="polaroid tilt-left-extreme">
+                    <div class="photo-placeholder"><img src="images/anh7.jpg" alt="Kỷ niệm 7" onerror="this.style.display='none'"><span class="placeholder-text">Ảnh 7</span></div>
+                    <div class="caption">Đứa em siêu quậy</div>
+                </div>
+                <div class="polaroid tilt-right-slight">
+                    <div class="photo-placeholder"><img src="images/anh8.jpg" alt="Kỷ niệm 8" onerror="this.style.display='none'"><span class="placeholder-text">Ảnh 8</span></div>
+                    <div class="caption">Dịu dàng chưa</div>
+                </div>
+
+                <!-- Hàng 4: 2 ảnh nhỏ cuối -->
+                <div class="polaroid tilt-right-extreme">
+                    <div class="photo-placeholder"><img src="images/anh9.jpg" alt="Kỷ niệm 9" onerror="this.style.display='none'"><span class="placeholder-text">Ảnh 9</span></div>
+                    <div class="caption">Bên nhau</div>
+                </div>
+                <div class="polaroid tilt-left-slight">
+                    <div class="photo-placeholder"><img src="images/anh10.jpg" alt="Kỷ niệm 10" onerror="this.style.display='none'"><span class="placeholder-text">Ảnh 10</span></div>
+                    <div class="caption">Chúc mừng sinh nhật!</div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Làm riêng tặng chị Lý | 20.05.2026</p>
+        </footer>
     </div>
 
-    <div id="star-field"></div>
-    <div id="shootingStar" class="shooting-star"></div>
+    <!-- Nhạc nền -->
+    <audio id="bg-music" src="nhacnen/nhacnen.mp3"></audio>
 
-    <div id="choiceScreen" class="screen">
-        <h2 style="color: #ffb6c1; font-size: 24px;">Trạm đã kết nối! Bạn muốn mở hòm thư nào? 💌</h2>
-        <div class="choice-container">
-            <button class="choice-btn" onclick="openLetter('health')"><span class="choice-icon">🔋</span> Sức Khỏe</button>
-            <button class="choice-btn" onclick="openLetter('study')"><span class="choice-icon">🚀</span> Học Tập</button>
-            <button class="choice-btn" onclick="openLetter('love')"><span class="choice-icon">💖</span> Tình Yêu</button>
-        </div>
-    </div>
-
-    <div id="letterScreen" class="screen">
-        <div class="letter-card">
-            <div id="letterTitle" class="letter-title"></div>
-            <div id="letterBody" class="letter-content"></div>
-            <button class="back-btn" onclick="goBack()">✨ Đọc thư khác ✨</button>
-        </div>
-    </div>
-
-    <script>
-        const bgMusic = document.getElementById("bgMusic");
-
-        function startJourney() {
-            bgMusic.load(); // Bắt buộc điện thoại nạp file nhạc
-            bgMusic.play().catch(e => console.log("Lỗi trình duyệt:", e));
-
-            document.getElementById("introScreen").classList.remove("active");
-            const welcome = document.getElementById("welcomeScreen");
-            welcome.classList.add("active");
-            welcome.classList.add("fade-in-screen");
-        }
-
-        let currentPass = "";
-        const display = document.getElementById("passDisplay");
-        const errorMsg = document.getElementById("errorMsg");
-
-        const lettersData = {
-            health: {
-                title: "Trạm Năng Lượng - Gửi cậu sức vóc dẻo dai! 🔋",
-                content: `
-                    <p>Gửi những bông hoa cứng cáp nhất của CLB,</p>
-                    <p>Cậu biết không, dù tàu vũ trụ có xịn xò đến mấy mà hết nhiên liệu thì cũng đành trôi dạt. Thế nên, ưu tiên hàng đầu mà tụi tớ muốn chúc cậu chính là sức khỏe!</p>
-                    <p>Mong cậu luôn duy trì được nguồn năng lượng bùng nổ như một vụ nổ <span class="highlight">Big Bang</span>, sức đề kháng vững chắc như lớp từ trường bảo vệ Trái Đất. Dù có bận rộn chạy deadline trên trường hay thức khuya ngắm sao cùng CLB, thì cũng nhớ ăn uống đủ chất và ngủ đủ giấc nhé.</p>
-                    <p>Cơ thể khỏe mạnh thì nụ cười mới tươi tắn và rạng rỡ được. Chúc cậu 8/3 luôn ngập tràn sức sống! 🌿</p>
-                    <div class="astronomy-note">
-                        <strong>🚀 Góc vũ trụ mini:</strong> Big Bang là Vụ Nổ Lớn khai sinh ra vũ trụ cách đây khoảng 13,8 tỷ năm. Nó đại diện cho sự khởi đầu và một nguồn năng lượng nguyên thủy, vô tận nhất của vạn vật.
-                    </div>
-                `
-            },
-            study: {
-                title: "Trạm Khám Phá - Chúc cậu bay cao bay xa! 🚀",
-                content: `
-                    <p>Gửi những nhà thám hiểm bầu trời đáng yêu,</p>
-                    <p>Hành trình học tập và theo đuổi đam mê nhiều lúc cũng gian nan như việc phóng một con tàu ra ngoài không gian vô tận vậy, sẽ có lúc đi chệch quỹ đạo một chút.</p>
-                    <p>Nhưng không sao cả! Chúc cậu luôn giữ được sự tò mò vô hạn với thế giới, có một góc nhìn sắc bén như kính viễn vọng <span class="highlight">James Webb</span> để nhìn thấu mọi rắc rối của bài vở. Mong rằng điểm số của cậu sẽ luôn bay ở quỹ đạo cao nhất, và mọi dự án dù lớn hay nhỏ đều sẽ "hạ cánh" thành công rực rỡ.</p>
-                    <p>Cứ tự tin khám phá những "thiên hà tri thức" mới nhé, vì cậu rất giỏi mà! 🌟</p>
-                    <div class="astronomy-note">
-                        <strong>🔭 Góc vũ trụ mini:</strong> Kính viễn vọng không gian James Webb (JWST) là "mắt thần" hiện đại và mạnh mẽ nhất của nhân loại hiện nay. Nhờ tia hồng ngoại, nó có thể nhìn xuyên thấu qua các đám mây bụi vũ trụ để khám phá những thiên hà xa xôi nhất.
-                    </div>
-                `
-            },
-            love: {
-                title: "Trạm Lực Hấp Dẫn - Gửi cậu một chút ngọt ngào! 💖",
-                content: `
-                    <p>Gửi những vì sao ngọt ngào nhất vũ trụ của chúng tớ,</p>
-                    <p>Người ta hay nói khoảng cách giữa các vì sao lạnh lẽo lắm, nhưng tớ tin "lực hấp dẫn" của sự chân thành sẽ luôn mang đến hơi ấm.</p>
-                    <p>Nhân ngày 8/3, chúc cậu sẽ sớm tìm được một <span class="highlight">hệ sao đôi</span> đồng điệu, nơi có người sẵn sàng cùng cậu quay quanh một quỹ đạo hạnh phúc. Còn nếu hiện tại cậu vẫn đang bay solo? Đừng lo lắng, vì bản thân cậu vốn dĩ đã là một vì tinh tú tỏa sáng rực rỡ và trọn vẹn nhất rồi!</p>
-                    <p>Hãy cứ yêu đời, yêu bản thân mình thật nhiều nhé. Mọi điều lãng mạn nhất của vũ trụ này đều dành cho cậu! ✨</p>
-                    <div class="astronomy-note">
-                        <strong>✨ Góc vũ trụ mini:</strong> Hệ sao đôi (Binary star) là một hệ thống gồm hai ngôi sao được gắn kết với nhau bởi lực hấp dẫn. Thay vì đứng yên, chúng nhịp nhàng quay quanh một khối tâm chung giữa không gian, biểu tượng cho sự đồng hành bền chặt.
-                    </div>
-                `
-            }
-        };
-
-        const layout = [['1','2','3','4','5','6','7','8','9','0'],['Q','W','E','R','T','Y','U','I','O','P'],['A','S','D','F','G','H','J','K','L'],['Z','X','C','V','B','N','M']];
-        const keyboardDiv = document.getElementById("keyboard");
-        layout.forEach(row => {
-            let rowDiv = document.createElement("div"); rowDiv.className = "key-row";
-            row.forEach(key => {
-                let btn = document.createElement("button"); btn.className = "key"; btn.innerText = key;
-                btn.onclick = () => { currentPass += key.toLowerCase(); display.innerText = currentPass; errorMsg.style.display = "none"; };
-                rowDiv.appendChild(btn);
-            });
-            keyboardDiv.appendChild(rowDiv);
-        });
-
-        function generateStars() {
-            const starField = document.getElementById("star-field"); starField.innerHTML = "";
-            for (let i = 0; i < 150; i++) {
-                const star = document.createElement("div"); star.className = "twinkle-star";
-                const size = Math.random() * 4 + "px"; star.style.width = size; star.style.height = size;
-                star.style.top = Math.random() * 100 + "%"; star.style.left = Math.random() * 100 + "%";
-                star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's'); starField.appendChild(star);
-            }
-            starField.style.display = "block";
-        }
-
-        function clearPass() { currentPass = ""; display.innerText = ""; }
-
-        function checkPassword() {
-            if (currentPass === "yeuac") {
-                if (bgMusic.paused) {
-                    bgMusic.play().catch(e => console.log(e));
-                }
-
-                document.getElementById("welcomeScreen").classList.remove("active");
-                const star = document.getElementById("shootingStar");
-                star.style.display = "block"; star.style.animation = "shooting 1.5s ease-in forwards";
-                setTimeout(() => {
-                    star.style.display = "none"; generateStars();
-                    document.getElementById("choiceScreen").classList.add("active"); document.getElementById("choiceScreen").classList.add("fade-in-screen");
-                }, 1500);
-            } else { errorMsg.style.display = "block"; clearPass(); }
-        }
-
-        function openLetter(type) {
-            document.getElementById("choiceScreen").classList.remove("active");
-            document.getElementById("letterTitle").innerHTML = lettersData[type].title;
-            document.getElementById("letterBody").innerHTML = lettersData[type].content;
-            document.getElementById("letterScreen").classList.add("active"); document.getElementById("letterScreen").classList.add("fade-in-screen");
-        }
-
-        function goBack() { document.getElementById("letterScreen").classList.remove("active"); document.getElementById("choiceScreen").classList.add("active"); }
-    </script>
+    <!-- Script tạo tương tác -->
+    <script src="js/main.js"></script>
 </body>
 </html>
-

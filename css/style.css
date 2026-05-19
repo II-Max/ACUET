@@ -1,0 +1,320 @@
+/* Reset cơ bản */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Màu nền phong cách giấy cũ/vintage */
+    background-color: #f4ebd0;
+    background-image: radial-gradient(#d4c4a8 1px, transparent 1px);
+    background-size: 20px 20px;
+    color: #4a3623;
+    font-family: 'Lora', serif; /* Font văn bản chính: Mềm mại, dễ đọc kiểu sách cũ */
+    line-height: 1.8;
+    overflow-x: hidden;
+}
+
+.vintage-container {
+    max-width: 900px; /* Tăng độ rộng để chứa được nhiều ảnh hơn */
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+/* Phần Hero */
+.hero {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.hero h1 {
+    font-family: 'Great Vibes', cursive; /* Font Tiêu đề cực kỳ hoa mỹ, lãng mạn */
+    font-size: 4.5rem;
+    color: #8c4a3e;
+    margin: 15px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+    letter-spacing: 1px;
+}
+
+.hero .subtitle {
+    font-family: 'Merriweather', serif; /* Font phụ đề sang trọng, trang trọng */
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #6d5b4b;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.floral-decoration {
+    font-size: 1.5rem;
+    color: #8c4a3e;
+    opacity: 0.8;
+}
+
+/* Phần Bức Thư */
+.letter-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.interactive-envelope {
+    width: 300px;
+    height: 150px;
+    background-color: #d1bfae;
+    border: 2px dashed #8c6b5d;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 10;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+    50% { transform: scale(1.03); box-shadow: 0 4px 15px rgba(140, 74, 62, 0.4); }
+    100% { transform: scale(1); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+}
+
+.interactive-envelope:hover {
+    animation: none;
+    transform: scale(1.05);
+}
+
+.envelope-cover span {
+    font-family: 'Dancing Script', cursive; /* Chữ trên phong bì bay bổng */
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #5c4033;
+}
+
+.letter-content {
+    width: 100%;
+    max-width: 650px;
+    margin-top: -75px; 
+    transition: all 0.8s ease-in-out;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.letter-content.hidden {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+    pointer-events: none;
+    position: absolute;
+    visibility: hidden;
+}
+
+.paper {
+    background-color: #fff9e6;
+    padding: 60px 50px 50px;
+    border-radius: 4px;
+    box-shadow: 2px 4px 20px rgba(0,0,0,0.15);
+    font-family: 'Caveat', cursive; /* Chữ viết tay cho nội dung thư */
+    font-size: 1.6rem;
+    color: #3e2723;
+    background-image: repeating-linear-gradient(transparent, transparent 31px, #d4c4a8 31px, #d4c4a8 32px);
+    line-height: 32px;
+}
+
+.paper h2 {
+    font-family: 'Playfair Display', serif; /* Tiêu đề đầu thư chân phương, cổ điển */
+    font-size: 1.7rem;
+    margin-bottom: 25px;
+    text-align: center;
+    color: #8c4a3e;
+    font-style: italic;
+}
+
+.paper p {
+    margin-bottom: 15px;
+    text-indent: 30px; /* Thụt lề đầu dòng giống viết tay */
+}
+
+.paper .signature {
+    text-align: right;
+    margin-top: 40px;
+    font-family: 'Dancing Script', cursive; /* Chữ ký uốn lượn */
+    font-weight: 700;
+    font-size: 2.2rem;
+    color: #8c4a3e;
+    text-indent: 0;
+}
+
+/* Phần Góc Kỷ Niệm (Polaroid) */
+.gallery {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.gallery-title {
+    font-family: 'Great Vibes', cursive; /* Tiêu đề góc ảnh đồng bộ với tiêu đề chính */
+    font-size: 3.5rem;
+    color: #8c4a3e;
+    margin-bottom: 10px;
+}
+
+.instruction {
+    font-family: 'Merriweather', serif;
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 40px;
+    font-style: italic;
+}
+
+.polaroid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.polaroid {
+    background: #fff;
+    padding: 12px 12px 35px 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2), 0 6px 20px rgba(0,0,0,0.1);
+    width: 200px;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Kích thước riêng cho ảnh ngang (landscape) */
+.polaroid.landscape {
+    width: 280px;
+}
+
+.polaroid:hover {
+    /* Hiệu ứng nổi lên (translateY) và xoay thẳng */
+    transform: scale(1.15) translateY(-10px) rotate(0deg) !important;
+    /* Bóng đổ đậm hơn, tạo chiều sâu 3D */
+    box-shadow: 0 15px 35px rgba(140, 74, 62, 0.25), 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 15;
+}
+
+/* Các góc nghiêng đa dạng cho 10 ảnh */
+.tilt-left { transform: rotate(-5deg); }
+.tilt-right { transform: rotate(4deg); }
+.tilt-left-slight { transform: rotate(-2deg); }
+.tilt-right-slight { transform: rotate(2deg); }
+.tilt-left-extreme { transform: rotate(-8deg); }
+.tilt-right-extreme { transform: rotate(7deg); }
+.tilt-straight { transform: rotate(0deg); }
+
+.photo-placeholder {
+    width: 100%;
+    height: 176px;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.2);
+}
+
+.polaroid.landscape .photo-placeholder {
+    height: 180px; /* Cân đối chiều cao để thành tỷ lệ ảnh ngang đẹp */
+}
+
+.photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    transition: filter 0.5s ease, transform 0.5s ease;
+    filter: sepia(40%) contrast(1.1) brightness(0.9); /* Màu vintage có chiều sâu */
+}
+
+.polaroid:hover .photo-placeholder img {
+    filter: sepia(0%) contrast(1.05) brightness(1); /* Xóa bộ lọc phim cũ khi hover */
+    transform: scale(1.08); /* Zoom nhẹ nội dung ảnh bên trong */
+}
+
+/* Hiệu ứng chớp sáng lướt qua (Glare/Shine effect) */
+.photo-placeholder::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    z-index: 3;
+    pointer-events: none;
+}
+
+.polaroid:hover .photo-placeholder::after {
+    /* Ánh sáng chạy ngang bức ảnh tạo cảm giác giấy in ảnh bóng */
+    animation: shine 0.8s ease-in-out forwards;
+}
+
+@keyframes shine {
+    0% { left: -150%; }
+    100% { left: 200%; }
+}
+
+.placeholder-text {
+    font-family: 'Playfair Display', serif;
+    color: #888;
+    z-index: 1;
+}
+
+.caption {
+    font-family: 'Caveat', cursive; /* Chú thích ảnh viết tay mộc mạc */
+    font-size: 1.4rem;
+    color: #444;
+    margin-top: 12px;
+}
+
+/* Footer */
+footer {
+    margin-top: 80px;
+    text-align: center;
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    color: #6d5b4b;
+    border-top: 1px solid #d4c4a8;
+    padding-top: 20px;
+}
+
+/* Reponsive */
+@media (max-width: 600px) {
+    .hero h1 { font-size: 3rem; }
+    .gallery-title { font-size: 2.5rem; }
+    .paper { padding: 50px 25px 25px; font-size: 1.4rem; line-height: 28px; }
+    .polaroid { width: 160px; padding: 10px 10px 25px 10px; }
+    .polaroid.landscape { width: 240px; } /* Kích thước ảnh ngang trên mobile */
+    .photo-placeholder { height: 140px; }
+    .polaroid.landscape .photo-placeholder { height: 155px; }
+    .caption { font-size: 1.2rem; }
+}
+
+/* Hiệu ứng cánh hoa rơi (Petals) */
+.petal {
+    position: fixed;
+    top: -20px;
+    z-index: 9999;
+    pointer-events: none;
+    background-color: #ffb6c1;
+    border-radius: 50% 0 50% 50%;
+    opacity: 0.8;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    0% { top: -20px; transform: translateX(0) rotate(0deg); opacity: 1; }
+    100% { top: 100vh; transform: translateX(100px) rotate(360deg); opacity: 0; }
+}
